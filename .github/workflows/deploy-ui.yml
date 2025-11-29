@@ -1,0 +1,41 @@
+name: Deploy UI to Vercel
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ui/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Install dependencies
+        run: |
+          cd ui
+          npm ci
+
+      - name: Build
+        run: |
+          cd ui
+          npm run build
+
+      - name: Deploy to Vercel
+        run: |
+          cd ui
+          vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

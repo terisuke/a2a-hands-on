@@ -1,0 +1,116 @@
+name: Deploy Agents to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'agents/**'
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: asia-northeast1
+
+jobs:
+  deploy-python-agents:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+
+      - name: Build and Deploy Encourager Agent
+        run: |
+          cd agents/python
+          docker build -f Dockerfile.encourager -t gcr.io/$PROJECT_ID/a2a-agent-encourager .
+          docker push gcr.io/$PROJECT_ID/a2a-agent-encourager
+          gcloud run deploy a2a-agent-encourager \
+            --image gcr.io/$PROJECT_ID/a2a-agent-encourager \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+      - name: Build and Deploy Rephraser Agent
+        run: |
+          cd agents/python
+          docker build -f Dockerfile.rephraser -t gcr.io/$PROJECT_ID/a2a-agent-rephraser .
+          docker push gcr.io/$PROJECT_ID/a2a-agent-rephraser
+          gcloud run deploy a2a-agent-rephraser \
+            --image gcr.io/$PROJECT_ID/a2a-agent-rephraser \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+  deploy-typescript-agents:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+
+      - name: Build and Deploy Namer Agent
+        run: |
+          cd agents/typescript
+          docker build -f Dockerfile.namer -t gcr.io/$PROJECT_ID/a2a-agent-namer .
+          docker push gcr.io/$PROJECT_ID/a2a-agent-namer
+          gcloud run deploy a2a-agent-namer \
+            --image gcr.io/$PROJECT_ID/a2a-agent-namer \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+      - name: Build and Deploy Commit Agent
+        run: |
+          cd agents/typescript
+          docker build -f Dockerfile.commit -t gcr.io/$PROJECT_ID/a2a-agent-commit .
+          docker push gcr.io/$PROJECT_ID/a2a-agent-commit
+          gcloud run deploy a2a-agent-commit \
+            --image gcr.io/$PROJECT_ID/a2a-agent-commit \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
