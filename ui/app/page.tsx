@@ -64,7 +64,7 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
-              4つのエージェントをそれぞれ単体で試してみましょう。
+              8つのエージェントをそれぞれ単体で試してみましょう。
             </p>
             <Link href="/agents">
               <Button size="sm" variant="outline">
@@ -161,6 +161,26 @@ export default function Home() {
           </Card>
           <Card>
             <CardHeader className="pb-2">
+              <CardTitle className="text-base">翻訳エージェント</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                日本語テキストを英語に翻訳します
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">要約エージェント</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                長いテキストを簡潔に要約します
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
               <CardTitle className="text-base">命名エージェント</CardTitle>
             </CardHeader>
             <CardContent>
@@ -176,6 +196,26 @@ export default function Home() {
             <CardContent>
               <p className="text-sm text-muted-foreground">
                 Gitコミットメッセージを生成します
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">レビューエージェント</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                コードに建設的なレビューを提供します
+              </p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">ドキュメントエージェント</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground">
+                技術ドキュメントを生成します
               </p>
             </CardContent>
           </Card>

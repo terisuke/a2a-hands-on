@@ -32,6 +32,34 @@ const agents: AgentInfo[] = [
     ],
   },
   {
+    id: "translator",
+    name: "翻訳エージェント",
+    description:
+      "日本語のテキストを英語に翻訳します。技術文書やコードのコメントを英語化したい時に使ってください。",
+    language: "Python",
+    skillId: "translate-ja-en",
+    tags: ["translation", "japanese", "english", "i18n"],
+    examples: [
+      "ユーザーのログイン状態を管理する関数",
+      "このクラスはデータベース接続を担当します",
+      "エラー処理を追加してください",
+    ],
+  },
+  {
+    id: "summarizer",
+    name: "要約エージェント",
+    description:
+      "長いテキストを簡潔に要約します。ドキュメントの概要作成や、長文レビューのポイント抽出に使ってください。",
+    language: "Python",
+    skillId: "summarize",
+    tags: ["summarization", "text-processing", "nlp"],
+    examples: [
+      "長いコードレビューコメントの要約",
+      "ミーティング議事録のポイント抽出",
+      "技術ドキュメントの概要作成",
+    ],
+  },
+  {
     id: "namer",
     name: "命名エージェント",
     description:
@@ -57,6 +85,34 @@ const agents: AgentInfo[] = [
       "ログイン画面のバリデーションを追加した",
       "パフォーマンス改善のためにキャッシュを導入",
       "READMEにインストール手順を追記",
+    ],
+  },
+  {
+    id: "reviewer",
+    name: "レビューエージェント",
+    description:
+      "コードや実装の説明に対して、建設的なレビューコメントを提供します。セルフレビューの補助や、レビュー観点の学習に使ってください。",
+    language: "TypeScript",
+    skillId: "code-review",
+    tags: ["review", "code-quality", "best-practices", "developer-tools"],
+    examples: [
+      "ユーザー認証のロジックをチェックして",
+      "このAPIエンドポイントの実装をレビューして",
+      "エラーハンドリングの改善点を教えて",
+    ],
+  },
+  {
+    id: "documenter",
+    name: "ドキュメントエージェント",
+    description:
+      "関数やクラスの説明から、わかりやすい技術ドキュメントを生成します。READMEやAPIドキュメントの作成に使ってください。",
+    language: "TypeScript",
+    skillId: "generate-docs",
+    tags: ["documentation", "technical-writing", "developer-tools"],
+    examples: [
+      "fetchUserDataという関数のドキュメントを書いて",
+      "このAPIエンドポイントのドキュメントを作成して",
+      "クラスの使い方を説明するドキュメントを生成して",
     ],
   },
 ];

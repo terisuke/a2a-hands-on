@@ -7,8 +7,12 @@
     "build": "tsc",
     "start:namer": "node dist/namer/index.js",
     "start:commit": "node dist/commit/index.js",
+    "start:reviewer": "node dist/reviewer/index.js",
+    "start:documenter": "node dist/documenter/index.js",
     "dev:namer": "tsx src/namer/index.ts",
     "dev:commit": "tsx src/commit/index.ts",
+    "dev:reviewer": "tsx src/reviewer/index.ts",
+    "dev:documenter": "tsx src/documenter/index.ts",
     "test": "vitest"
   },
   "dependencies": {

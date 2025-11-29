@@ -4,7 +4,11 @@
   "env": {
     "NEXT_PUBLIC_AGENT_ENCOURAGER_URL": "@agent-encourager-url",
     "NEXT_PUBLIC_AGENT_REPHRASER_URL": "@agent-rephraser-url",
+    "NEXT_PUBLIC_AGENT_TRANSLATOR_URL": "@agent-translator-url",
+    "NEXT_PUBLIC_AGENT_SUMMARIZER_URL": "@agent-summarizer-url",
     "NEXT_PUBLIC_AGENT_NAMER_URL": "@agent-namer-url",
-    "NEXT_PUBLIC_AGENT_COMMIT_URL": "@agent-commit-url"
+    "NEXT_PUBLIC_AGENT_COMMIT_URL": "@agent-commit-url",
+    "NEXT_PUBLIC_AGENT_REVIEWER_URL": "@agent-reviewer-url",
+    "NEXT_PUBLIC_AGENT_DOCUMENTER_URL": "@agent-documenter-url"
   }
 }

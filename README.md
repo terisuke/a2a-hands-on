@@ -38,12 +38,16 @@ A2A (Agent-to-Agent) Protocol 入門ハンズオン用のシステムです。
 
 ## エージェント一覧
 
-| エージェント | 言語 | 説明 |
-|------------|------|------|
-| 励ましエージェント | Python | 悩みに共感し、温かい励ましを返す |
-| 言い換えエージェント | Python | 攻撃的な表現をマイルドに変換 |
-| 命名エージェント | TypeScript | 変数名・関数名の候補を提案 |
-| コミットメッセージエージェント | TypeScript | Gitコミットメッセージを生成 |
+| エージェント | 言語 | ポート | 説明 |
+|------------|------|--------|------|
+| 励ましエージェント | Python | 8080 | 悩みに共感し、温かい励ましを返す |
+| 言い換えエージェント | Python | 8081 | 攻撃的な表現をマイルドに変換 |
+| 翻訳エージェント | Python | 8084 | 日本語テキストを英語に翻訳 |
+| 要約エージェント | Python | 8085 | 長いテキストを簡潔に要約 |
+| 命名エージェント | TypeScript | 8082 | 変数名・関数名の候補を提案 |
+| コミットメッセージエージェント | TypeScript | 8083 | Gitコミットメッセージを生成 |
+| レビューエージェント | TypeScript | 8086 | コードに対して建設的なレビューを提供 |
+| ドキュメントエージェント | TypeScript | 8087 | 技術ドキュメントを生成 |
 
 ## プロジェクト構成
 
@@ -54,14 +58,18 @@ a2a-handson/
 │   │   ├── src/
 │   │   │   ├── common/      # 共通モジュール
 │   │   │   ├── encourager/  # 励ましエージェント
-│   │   │   └── rephraser/   # 言い換えエージェント
+│   │   │   ├── rephraser/   # 言い換えエージェント
+│   │   │   ├── translator/  # 翻訳エージェント
+│   │   │   └── summarizer/  # 要約エージェント
 │   │   └── Dockerfile.*
 │   │
 │   └── typescript/          # TypeScriptエージェント
 │       ├── src/
 │       │   ├── common/      # 共通モジュール
 │       │   ├── namer/       # 命名エージェント
-│       │   └── commit/      # コミットメッセージエージェント
+│       │   ├── commit/      # コミットメッセージエージェント
+│       │   ├── reviewer/    # レビューエージェント
+│       │   └── documenter/  # ドキュメントエージェント
 │       └── Dockerfile.*
 │
 ├── ui/                      # React UI (Next.js)
@@ -92,6 +100,12 @@ PYTHONPATH=. uvicorn src.encourager.main:app --port 8080
 
 # 言い換えエージェント (port 8081)
 PYTHONPATH=. uvicorn src.rephraser.main:app --port 8081
+
+# 翻訳エージェント (port 8084)
+PYTHONPATH=. uvicorn src.translator.main:app --port 8084
+
+# 要約エージェント (port 8085)
+PYTHONPATH=. uvicorn src.summarizer.main:app --port 8085
 ```
 
 ### TypeScriptエージェントの起動
@@ -105,6 +119,12 @@ npm run dev:namer
 
 # コミットメッセージエージェント (port 8083)
 npm run dev:commit
+
+# レビューエージェント (port 8086)
+npm run dev:reviewer
+
+# ドキュメントエージェント (port 8087)
+npm run dev:documenter
 ```
 
 ### UIの起動

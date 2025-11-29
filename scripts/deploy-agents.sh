@@ -51,6 +51,40 @@ gcloud run deploy a2a-agent-rephraser \
   --timeout 60s \
   --project $PROJECT_ID
 
+# Translator Agent
+echo "Building and deploying Translator Agent..."
+gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-translator \
+  --project $PROJECT_ID \
+  --dockerfile Dockerfile.translator
+
+gcloud run deploy a2a-agent-translator \
+  --image gcr.io/$PROJECT_ID/a2a-agent-translator \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --min-instances 1 \
+  --max-instances 10 \
+  --memory 512Mi \
+  --timeout 60s \
+  --project $PROJECT_ID
+
+# Summarizer Agent
+echo "Building and deploying Summarizer Agent..."
+gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-summarizer \
+  --project $PROJECT_ID \
+  --dockerfile Dockerfile.summarizer
+
+gcloud run deploy a2a-agent-summarizer \
+  --image gcr.io/$PROJECT_ID/a2a-agent-summarizer \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --min-instances 1 \
+  --max-instances 10 \
+  --memory 512Mi \
+  --timeout 60s \
+  --project $PROJECT_ID
+
 cd ../..
 
 # Deploy TypeScript Agents
@@ -82,6 +116,40 @@ gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-commit \
 
 gcloud run deploy a2a-agent-commit \
   --image gcr.io/$PROJECT_ID/a2a-agent-commit \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --min-instances 1 \
+  --max-instances 10 \
+  --memory 512Mi \
+  --timeout 60s \
+  --project $PROJECT_ID
+
+# Reviewer Agent
+echo "Building and deploying Reviewer Agent..."
+gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-reviewer \
+  --project $PROJECT_ID \
+  --dockerfile Dockerfile.reviewer
+
+gcloud run deploy a2a-agent-reviewer \
+  --image gcr.io/$PROJECT_ID/a2a-agent-reviewer \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --min-instances 1 \
+  --max-instances 10 \
+  --memory 512Mi \
+  --timeout 60s \
+  --project $PROJECT_ID
+
+# Documenter Agent
+echo "Building and deploying Documenter Agent..."
+gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-documenter \
+  --project $PROJECT_ID \
+  --dockerfile Dockerfile.documenter
+
+gcloud run deploy a2a-agent-documenter \
+  --image gcr.io/$PROJECT_ID/a2a-agent-documenter \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
