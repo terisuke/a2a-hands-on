@@ -3,3 +3,4 @@ steps:
   args: ['build', '-f', 'Dockerfile.rephraser', '-t', 'asia-northeast1-docker.pkg.dev/a2a-hands-on/a2a-agents/a2a-agent-rephraser', '.']
 images:
 - 'asia-northeast1-docker.pkg.dev/a2a-hands-on/a2a-agents/a2a-agent-rephraser'
+serviceAccount: 'projects/a2a-hands-on/serviceAccounts/github-actions@a2a-hands-on.iam.gserviceaccount.com'

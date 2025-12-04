@@ -3,3 +3,5 @@ steps:
   args: ['build', '-f', 'Dockerfile.encourager', '-t', 'asia-northeast1-docker.pkg.dev/a2a-hands-on/a2a-agents/a2a-agent-encourager', '.']
 images:
 - 'asia-northeast1-docker.pkg.dev/a2a-hands-on/a2a-agents/a2a-agent-encourager'
+serviceAccount: 'projects/a2a-hands-on/serviceAccounts/github-actions@a2a-hands-on.iam.gserviceaccount.com'
+serviceAccount: 'projects/a2a-hands-on/serviceAccounts/github-actions@a2a-hands-on.iam.gserviceaccount.com'
