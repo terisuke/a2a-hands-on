@@ -36,7 +36,7 @@ jobs:
       - name: Build and Deploy Encourager Agent
         run: |
           cd agents/python
-          gcloud builds submit --config=cloudbuild.encourager.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.encourager.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-encourager \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-encourager \
             --platform managed \
@@ -50,7 +50,7 @@ jobs:
       - name: Build and Deploy Rephraser Agent
         run: |
           cd agents/python
-          gcloud builds submit --config=cloudbuild.rephraser.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.rephraser.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-rephraser \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-rephraser \
             --platform managed \
@@ -64,7 +64,7 @@ jobs:
       - name: Build and Deploy Translator Agent
         run: |
           cd agents/python
-          gcloud builds submit --config=cloudbuild.translator.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.translator.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-translator \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-translator \
             --platform managed \
@@ -78,7 +78,7 @@ jobs:
       - name: Build and Deploy Summarizer Agent
         run: |
           cd agents/python
-          gcloud builds submit --config=cloudbuild.summarizer.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.summarizer.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-summarizer \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-summarizer \
             --platform managed \
@@ -112,7 +112,7 @@ jobs:
       - name: Build and Deploy Namer Agent
         run: |
           cd agents/typescript
-          gcloud builds submit --config=cloudbuild.namer.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.namer.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-namer \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-namer \
             --platform managed \
@@ -126,7 +126,7 @@ jobs:
       - name: Build and Deploy Commit Agent
         run: |
           cd agents/typescript
-          gcloud builds submit --config=cloudbuild.commit.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.commit.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-commit \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-commit \
             --platform managed \
@@ -140,7 +140,7 @@ jobs:
       - name: Build and Deploy Reviewer Agent
         run: |
           cd agents/typescript
-          gcloud builds submit --config=cloudbuild.reviewer.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.reviewer.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-reviewer \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-reviewer \
             --platform managed \
@@ -154,7 +154,7 @@ jobs:
       - name: Build and Deploy Documenter Agent
         run: |
           cd agents/typescript
-          gcloud builds submit --config=cloudbuild.documenter.yaml --project $PROJECT_ID
+          gcloud builds submit --config=cloudbuild.documenter.yaml --project $PROJECT_ID --quiet
           gcloud run deploy a2a-agent-documenter \
             --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-documenter \
             --platform managed \
