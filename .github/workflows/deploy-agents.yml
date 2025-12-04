@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  PROJECT_ID: a2a-hands-on
   REGION: asia-northeast1
 
 jobs:
@@ -37,10 +37,9 @@ jobs:
       - name: Build and Deploy Encourager Agent
         run: |
           cd agents/python
-          docker build -f Dockerfile.encourager -t gcr.io/$PROJECT_ID/a2a-agent-encourager .
-          docker push gcr.io/$PROJECT_ID/a2a-agent-encourager
+          gcloud builds submit --config=cloudbuild.encourager.yaml --project $PROJECT_ID
           gcloud run deploy a2a-agent-encourager \
-            --image gcr.io/$PROJECT_ID/a2a-agent-encourager \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-encourager \
             --platform managed \
             --region $REGION \
             --allow-unauthenticated \
@@ -52,10 +51,37 @@ jobs:
       - name: Build and Deploy Rephraser Agent
         run: |
           cd agents/python
-          docker build -f Dockerfile.rephraser -t gcr.io/$PROJECT_ID/a2a-agent-rephraser .
-          docker push gcr.io/$PROJECT_ID/a2a-agent-rephraser
+          gcloud builds submit --config=cloudbuild.rephraser.yaml --project $PROJECT_ID
           gcloud run deploy a2a-agent-rephraser \
-            --image gcr.io/$PROJECT_ID/a2a-agent-rephraser \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-rephraser \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+      - name: Build and Deploy Translator Agent
+        run: |
+          cd agents/python
+          gcloud builds submit --config=cloudbuild.translator.yaml --project $PROJECT_ID
+          gcloud run deploy a2a-agent-translator \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-translator \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+      - name: Build and Deploy Summarizer Agent
+        run: |
+          cd agents/python
+          gcloud builds submit --config=cloudbuild.summarizer.yaml --project $PROJECT_ID
+          gcloud run deploy a2a-agent-summarizer \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-summarizer \
             --platform managed \
             --region $REGION \
             --allow-unauthenticated \
@@ -88,10 +114,9 @@ jobs:
       - name: Build and Deploy Namer Agent
         run: |
           cd agents/typescript
-          docker build -f Dockerfile.namer -t gcr.io/$PROJECT_ID/a2a-agent-namer .
-          docker push gcr.io/$PROJECT_ID/a2a-agent-namer
+          gcloud builds submit --config=cloudbuild.namer.yaml --project $PROJECT_ID
           gcloud run deploy a2a-agent-namer \
-            --image gcr.io/$PROJECT_ID/a2a-agent-namer \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-namer \
             --platform managed \
             --region $REGION \
             --allow-unauthenticated \
@@ -103,10 +128,37 @@ jobs:
       - name: Build and Deploy Commit Agent
         run: |
           cd agents/typescript
-          docker build -f Dockerfile.commit -t gcr.io/$PROJECT_ID/a2a-agent-commit .
-          docker push gcr.io/$PROJECT_ID/a2a-agent-commit
+          gcloud builds submit --config=cloudbuild.commit.yaml --project $PROJECT_ID
           gcloud run deploy a2a-agent-commit \
-            --image gcr.io/$PROJECT_ID/a2a-agent-commit \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-commit \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+      - name: Build and Deploy Reviewer Agent
+        run: |
+          cd agents/typescript
+          gcloud builds submit --config=cloudbuild.reviewer.yaml --project $PROJECT_ID
+          gcloud run deploy a2a-agent-reviewer \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-reviewer \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi \
+            --timeout 60s
+
+      - name: Build and Deploy Documenter Agent
+        run: |
+          cd agents/typescript
+          gcloud builds submit --config=cloudbuild.documenter.yaml --project $PROJECT_ID
+          gcloud run deploy a2a-agent-documenter \
+            --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-documenter \
             --platform managed \
             --region $REGION \
             --allow-unauthenticated \

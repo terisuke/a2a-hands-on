@@ -19,12 +19,11 @@ echo "=== Deploying Python Agents ==="
 # Encourager Agent
 echo "Building and deploying Encourager Agent..."
 cd agents/python
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-encourager \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.encourager
+gcloud builds submit --config=cloudbuild.encourager.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-encourager \
-  --image gcr.io/$PROJECT_ID/a2a-agent-encourager \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-encourager \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -36,12 +35,11 @@ gcloud run deploy a2a-agent-encourager \
 
 # Rephraser Agent
 echo "Building and deploying Rephraser Agent..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-rephraser \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.rephraser
+gcloud builds submit --config=cloudbuild.rephraser.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-rephraser \
-  --image gcr.io/$PROJECT_ID/a2a-agent-rephraser \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-rephraser \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -53,12 +51,11 @@ gcloud run deploy a2a-agent-rephraser \
 
 # Translator Agent
 echo "Building and deploying Translator Agent..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-translator \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.translator
+gcloud builds submit --config=cloudbuild.translator.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-translator \
-  --image gcr.io/$PROJECT_ID/a2a-agent-translator \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-translator \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -70,12 +67,11 @@ gcloud run deploy a2a-agent-translator \
 
 # Summarizer Agent
 echo "Building and deploying Summarizer Agent..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-summarizer \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.summarizer
+gcloud builds submit --config=cloudbuild.summarizer.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-summarizer \
-  --image gcr.io/$PROJECT_ID/a2a-agent-summarizer \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-summarizer \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -93,12 +89,11 @@ echo "=== Deploying TypeScript Agents ==="
 # Namer Agent
 echo "Building and deploying Namer Agent..."
 cd agents/typescript
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-namer \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.namer
+gcloud builds submit --config=cloudbuild.namer.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-namer \
-  --image gcr.io/$PROJECT_ID/a2a-agent-namer \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-namer \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -110,12 +105,11 @@ gcloud run deploy a2a-agent-namer \
 
 # Commit Agent
 echo "Building and deploying Commit Message Agent..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-commit \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.commit
+gcloud builds submit --config=cloudbuild.commit.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-commit \
-  --image gcr.io/$PROJECT_ID/a2a-agent-commit \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-commit \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -127,12 +121,11 @@ gcloud run deploy a2a-agent-commit \
 
 # Reviewer Agent
 echo "Building and deploying Reviewer Agent..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-reviewer \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.reviewer
+gcloud builds submit --config=cloudbuild.reviewer.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-reviewer \
-  --image gcr.io/$PROJECT_ID/a2a-agent-reviewer \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-reviewer \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
@@ -144,12 +137,11 @@ gcloud run deploy a2a-agent-reviewer \
 
 # Documenter Agent
 echo "Building and deploying Documenter Agent..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/a2a-agent-documenter \
-  --project $PROJECT_ID \
-  --dockerfile Dockerfile.documenter
+gcloud builds submit --config=cloudbuild.documenter.yaml \
+  --project $PROJECT_ID
 
 gcloud run deploy a2a-agent-documenter \
-  --image gcr.io/$PROJECT_ID/a2a-agent-documenter \
+  --image asia-northeast1-docker.pkg.dev/$PROJECT_ID/a2a-agents/a2a-agent-documenter \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
