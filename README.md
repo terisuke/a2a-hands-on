@@ -194,3 +194,4 @@ A2A (Agent-to-Agent) プロトコルは、異なるAIエージェント同士が
 ## ライセンス
 
 MIT
+# Test commit to trigger CI/CD
