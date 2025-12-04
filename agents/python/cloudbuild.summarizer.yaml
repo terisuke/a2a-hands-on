@@ -1,3 +1,5 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'Dockerfile.summarizer', '-t', 'asia-northeast1-docker.pkg.dev/a2a-hands-on/a2a-agents/a2a-agent-summarizer', '.']
